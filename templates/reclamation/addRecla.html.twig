@@ -1,0 +1,28 @@
+{% extends 'contact.html.twig' %}
+{% block form %}
+    <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+    {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+    <label>Statut</label>
+    {{ form_widget(form.statut,{'attr':{'class':'form-control'}}) }}
+        <div class="alert alert-warning" role="alert">
+            {{form_errors(form.statut)}}
+        </div>
+
+    <label>Type</label>
+    {{ form_widget(form.type,{'attr':{'class':'form-control'}}) }}
+        <div class="alert alert-warning" role="alert">
+            {{form_errors(form.type)}}
+        </div>
+    <label>Admin</label>
+    {{ form_widget(form.admin,{'attr':{'class':''}}) }}    <br>
+
+        <label>Description</label>
+        {{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+        <div class="alert alert-warning" role="alert">
+            {{form_errors(form.description)}}
+        </div>
+
+    <button class="btn btn-style btn-primary">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
