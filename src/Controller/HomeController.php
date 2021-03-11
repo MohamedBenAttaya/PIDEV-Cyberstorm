@@ -2,17 +2,19 @@
 
 namespace App\Controller;
 
-use App\Entity\Evenement;
-use App\Entity\Reclamation;
-use App\Form\EvenementType;
-use App\Form\ReclamationType;
-use App\Repository\EvenementRepository;
-use App\Repository\ReclamationRepository;
+use App\Entity\Hotel;
+use App\Entity\Maison;
+use App\Form\HotelType;
+use App\Repository\HotelRepository;
+use App\Repository\MaisonRepository;
+use App\Repository\PromotionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class HomeController extends AbstractController
 {
@@ -25,207 +27,142 @@ class HomeController extends AbstractController
             'controller_name' => 'HomeController',
         ]);
     }
-
-
-   /**
-    * @Route("/addevent", name="addevents")
-    */
-    public function new(Request $request): Response
-    {
-        $evenement = new Evenement();
-        $form = $this->createForm(EvenementType::class, $evenement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($evenement);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('showEvent');
-        }
-
-        return $this->render('evenement/addEvent.html.twig', [
-            'evenement' => $evenement,
-            'form' => $form->createView(),
-        ]);
-    }
-
-
     /**
-     * @Route("/afficheEvent", name="showEvent", methods={"GET"})
+     * @Route("/profil", name="profil", methods={"GET"})
      */
-    public function indexEvent(EvenementRepository $evenementRepository): Response
+    public function indexProfil(MaisonRepository $maisonRepository,HotelRepository $hotelRepository): Response
     {
-        return $this->render('evenement/indexEvent.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/modifi", name="eventModif", methods={"GET","POST"})
-     */
-    public function edit(Request $request, Evenement $evenement): Response
-    {
-        $form = $this->createForm(EvenementType::class, $evenement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('showEvent');
-        }
-
-        return $this->render('evenement/EventEdit.html.twig', [
-            'evenement' => $evenement,
-            'form' => $form->createView(),
+        return $this->render('Profil.html.twig', [
+            'maisons' => $maisonRepository->findAll(),
+            'hotels' => $hotelRepository->findAll(),
         ]);
     }
     /**
-     * @Route("/{id}/modifia", name="eventModifAdmin", methods={"GET","POST"})
+     * @Route("/homeA", name="home_admin")
      */
-    public function editEventAdmin(Request $request, Evenement $evenement): Response
-    {
-        $form = $this->createForm(EvenementType::class, $evenement);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('showEventA');
-        }
-
-        return $this->render('home_admin/EventEditAdmin.html.twig', [
-            'evenement' => $evenement,
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
-     * @Route("/addrecla", name="newRecla", methods={"GET","POST"})
-     */
-    public function newReclamation(Request $request): Response
-    {
-        $reclamation = new Reclamation();
-        $form = $this->createForm(ReclamationType::class, $reclamation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($reclamation);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('showRecla');
-        }
-
-        return $this->render('reclamation/addRecla.html.twig', [
-            'reclamation' => $reclamation,
-            'form' => $form->createView(),
-        ]);
-    }
-    /**
-     * @Route("/afficheRecla", name="showRecla", methods={"GET"})
-     */
-    public function indexReclamation(ReclamationRepository $reclamationRepository): Response
-    {
-        return $this->render('reclamation/indexRecla.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}/edit", name="editRecla", methods={"GET","POST"})
-     */
-    public function editReclamation(Request $request, Reclamation $reclamation): Response
-    {
-        $form = $this->createForm(ReclamationType::class, $reclamation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('showRecla');
-        }
-
-        return $this->render('reclamation/editReecla.html.twig', [
-            'reclamation' => $reclamation,
-            'form' => $form->createView(),
-        ]);
-    }
-    /**
-     * @Route("/{id}/edits", name="editReclaAdmin", methods={"GET","POST"})
-     */
-    public function editReclamationAdmin(Request $request, Reclamation $reclamation): Response
-    {
-        $form = $this->createForm(ReclamationType::class, $reclamation);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('showReclaA');
-        }
-
-        return $this->render('home_admin/editReeclaA.html.twig', [
-            'reclamation' => $reclamation,
-            'form' => $form->createView(),
-        ]);
-    }
-    /**
-     * @Route("/HAdmin", name="home_admin")
-     */
-    public function indexHomeAdmin(): Response
+    public function indexAdmin(): Response
     {
         return $this->render('home_admin/index.html.twig', [
             'controller_name' => 'HomeAdminController',
         ]);
     }
-
     /**
-     * @Route("/afficheReclaA", name="showReclaA", methods={"GET"})
+     * @Route("/homeA/hotel", name="AgestionHotel")
      */
-    public function indexReclamationAdm(ReclamationRepository $reclamationRepository): Response
+    public function indexHotel(HotelRepository $hotelRepository): Response
     {
-        return $this->render('home_admin/index.html.twig', [
-            'reclamations' => $reclamationRepository->findAll(),
+        return $this->render('home_admin/gestionHotel.html.twig', [
+            'hotels' => $hotelRepository->findAll(),
         ]);
     }
     /**
-     * @Route("/afficheEventA", name="showEventA", methods={"GET"})
+     * @Route("/homeA/suppH/{id}", name="ADeleteHotel")
      */
-    public function indexEventAdm(EvenementRepository $evenementRepository): Response
+    public function deleteAHotel(HotelRepository $repository, $id): Response
     {
-        return $this->render('home_admin/eventAdmin.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+        $hotel=$repository->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($hotel);
+        $em->flush();
+        return $this->redirectToRoute('AgestionHotel');
+    }
+    /**
+     * @Route("/homeA/promotion", name="AgestionPromotion")
+     */
+    public function indexPromotion(PromotionRepository $promotionRepository): Response
+    {
+        return $this->render('home_admin/gestionPromotion.html.twig', [
+            'promotions' => $promotionRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/homeA/suppP/{id}", name="ADeletePromotion")
+     */
+    public function deleteAPromotion(PromotionRepository $repository, $id): Response
+    {
+        $promotion=$repository->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($promotion);
+        $em->flush();
+        return $this->redirectToRoute('AgestionPromotion');
+    }
+    /**
+     * @Route("/homeA/maison", name="AgestionMaison")
+     */
+    public function indexMaison(MaisonRepository $maisonRepository): Response
+    {
+        return $this->render('home_admin/gestionMaison.html.twig', [
+            'maisons' => $maisonRepository->findAll(),
+        ]);
+    }
+    /**
+     * @Route("/homeA/suppM/{id}", name="ADeleteMaison")
+     */
+    public function deleteAMaison(MaisonRepository $repository, $id): Response
+    {
+        $maison=$repository->find($id);
+        $em=$this->getDoctrine()->getManager();
+        $em->remove($maison);
+        $em->flush();
+        return $this->redirectToRoute('AgestionMaison');
+    }
+    /**
+     * @Route("/homeA/recherche", name="recherche")
+     */
+    public function recherche(Request $request): Response
+    {
+        $data=$request->get('data');
+        $em = $this->getDoctrine()->getManager();
+        $hotels = $em->getRepository(Hotel::class)->search($data);
+        return $this->render('home_admin/gestionHotel.html.twig', [
+            'hotels' => $hotels,
+        ]);
+    }
+    /**
+     * @Route("/homeA/search", name="search",methods={"POST"})
+     */
+    public function searchAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $name= $request->get('dat');
+        $maisons = $em->getRepository(Maison::class)->search($name);
+
+        return $this->render('home_admin/gestionMaison.html.twig', array(
+            'maisons' => $maisons,
+        ));
+    }
+    /**
+     * @Route("/pdfH", name="pdf")
+     */
+    public function afficheReclPdf()
+    {
+// Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $hotels = $this->getDoctrine()->getRepository(Hotel::class)->findAll();
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('home_admin/mypdf.html.twig', [
+            'hotels' => $hotels
+        ]);
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream("mypdf.pdf", [
+            "Attachment" => true
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="reclamation_delete_Admin", methods={"DELETE"})
-     */
-    public function deleteReclamationAdmin(Request $request, Reclamation $reclamation): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$reclamation->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($reclamation);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('showReclaA');
-    }
-
-    /**
-     * @Route("/{id}", name="evenement_delete_adm", methods={"DELETE"})
-     */
-    public function deleteEveAdm(Request $request, Evenement $evenement, EvenementRepository $evenementRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$evenement->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($evenement);
-            $entityManager->flush();
-        }
-
-        return $this->render('home_admin/eventAdmin.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
-        ]);
-    }
 }
