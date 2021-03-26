@@ -1,0 +1,29 @@
+  {% extends 'base.html.twig' %}
+
+{% block title %}New Hotel{% endblock %}
+
+                  {% block content %}
+<br> <br> <br>
+  <section class="w3l-contact" id="contact">
+      <div class="contact-infubd py-5">
+          <div class="container py-lg-3">
+              <div style="margin: 8px auto; display: block; text-align:center;">
+
+                  <!---728x90--->
+
+
+                      <h1>Create new Hotel</h1>
+
+                      {{ include('hotel/_form.html.twig') }}
+
+                      <a class="btn btn-style btn-primary" href="{{ path('profil') }}">back to list</a>
+
+
+              </div>
+              <div class="contact-grids row">
+
+              </div>
+          </div>
+      </div>
+  </section>
+                  {% endblock %}

@@ -1,0 +1,33 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <label>Nom</label>
+    {{ form_widget(form.Nom,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.Nom)}}
+    </div>
+    <label>adresse</label>
+    {{ form_widget(form.adresse,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.adresse)}}
+    </div>
+    <label>description</label>
+    {{ form_widget(form.description,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.description)}}
+    </div>
+    <label>prix</label>
+    {{ form_widget(form.prix,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.prix)}}
+    </div>
+    <label>type</label>
+    {{ form_widget(form.type,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.type)}}
+    </div>
+    <label>image</label>
+    {{ form_widget(form.image,{'attr':{'class':'form-control'}})  }}
+    {{ form_widget(form.Disponibilite,type="hidden")  }}
+    <button class="btn btn-style btn-primary">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

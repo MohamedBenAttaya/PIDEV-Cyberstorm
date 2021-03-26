@@ -1,0 +1,39 @@
+{% extends 'home_admin/index.html.twig' %}
+
+{% block title %}Hotel index{% endblock %}
+
+{% block content %}
+    <br> <br> <br> <br>
+    <h1>Promotion index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Type</th>
+            <th>Reduction</th>
+            <th>Nom de l'hotel</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for promotion in promotions %}
+            <tr>
+                <td>{{ promotion.Nom }}</td>
+                <td>{{ promotion.description }}</td>
+                <td>{{ promotion.type }}</td>
+                <td>{{ promotion.Reduction }}</td>
+                <td>{{ promotion.hotel.Nom }}</td>
+                <td>
+                    <a href="{{ path('ADeletePromotion', {'id': promotion.id}) }}">supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

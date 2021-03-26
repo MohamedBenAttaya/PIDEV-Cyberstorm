@@ -1,0 +1,37 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <label>Nom</label>
+    {{ form_widget(form.Nom,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.Nom)}}
+    </div>
+    <label>adresse</label>
+    {{ form_widget(form.adresse,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.adresse)}}
+    </div>
+    <label>prix</label>
+    {{ form_widget(form.prix,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.prix)}}
+    </div>
+    <label>Description</label>
+    {{ form_widget(form.Description,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.Description)}}
+    </div>
+    <label>Nombre d'étoiles</label>
+    {{ form_widget(form.NbEtoile,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.NbEtoile)}}
+    </div>
+    <label>Nombre de chambres disponibles</label>
+    {{ form_widget(form.NbChambre,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.NbChambre)}}
+    </div>
+    <label>image</label>
+    {{ form_widget(form.image,{'attr':{'class':'form-control'}})  }}
+    <button class="btn btn-style btn-primary">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

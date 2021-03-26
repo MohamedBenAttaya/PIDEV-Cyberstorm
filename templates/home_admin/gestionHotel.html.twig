@@ -1,0 +1,50 @@
+{% extends 'home_admin/index.html.twig' %}
+
+{% block title %}Hotel index{% endblock %}
+
+{% block content %}
+    <br> <br> <br> <br> <br>
+    <h1>Hotel index</h1>
+    <form method="post" action="{{ path('recherche') }}">
+        <label>Entrer nom de l'hotel</label>
+        <label>
+            <input type="text" name="data" class="form-control">
+        </label><input type="submit" class="btn btn-style btn-primary" value="Recherche">
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>NbEtoile</th>
+            <th>NbChambre</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for hotel in hotels %}
+            <tr>
+                <td>{{ hotel.Nom }}</td>
+                <td>{{ hotel.adresse }}</td>
+                <td>{{ hotel.prix }}</td>
+                <td>{{ hotel.Description }}</td>
+                <td>{{ hotel.NbEtoile }}</td>
+                <td>{{ hotel.NbChambre }}</td>
+                <td>
+                    <a href="{{ path('ADeleteHotel', {'id': hotel.id}) }}">supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href ="{{ path('pdf') }}" class="btn btn-primary" >print PDF</a>
+    <a href ="{{ path('export') }}" class="btn btn-primary" >export</a>
+
+{% endblock %}
+

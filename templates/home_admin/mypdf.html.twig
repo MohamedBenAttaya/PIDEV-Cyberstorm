@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title of the document</title>
+</head>
+
+<body>
+<br><br>
+<table border="1" class="table">
+    <thead>
+    <tr>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Prix</th>
+        <th>Description</th>
+        <th>NbEtoile</th>
+        <th>NbChambre</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for hotel in hotels %}
+        <tr>
+            <td>{{ hotel.Nom }}</td>
+            <td>{{ hotel.adresse }}</td>
+            <td>{{ hotel.prix }}</td>
+            <td>{{ hotel.Description }}</td>
+            <td>{{ hotel.NbEtoile }}</td>
+            <td>{{ hotel.NbChambre }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="8">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+
+</html>

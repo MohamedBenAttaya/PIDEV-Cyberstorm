@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block content %}
+    <br> <br> <br> <br> <br>
+    <h1>Hotel:</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Adresse</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>NbEtoile</th>
+            <th>NbChambre</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for hotel in hotels %}
+            <tr>
+                <td>{{ hotel.Nom }}</td>
+                <td>{{ hotel.adresse }}</td>
+                <td>{{ hotel.prix }}</td>
+                <td>{{ hotel.Description }}</td>
+                <td>{{ hotel.NbEtoile }}</td>
+                <td>{{ hotel.NbChambre }}</td>
+                <td>
+                    <a class="btn btn-style btn-primary" href="{{ path('hotel_edit', {'id': hotel.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+<center>
+    <a class="btn btn-style btn-primary" href="{{ path('hotel_new') }}">Create new hotel</a>
+</center>
+    <h1>Maison:</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Type</th>
+            <th>Disponibilite</th>
+            <th>Adresse</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for maison in maisons %}
+            <tr>
+                <td>{{ maison.Nom }}</td>
+                <td>{{ maison.type }}</td>
+                <td>{{ maison.Disponibilite ? 'Yes' : 'No' }}</td>
+                <td>{{ maison.adresse }}</td>
+                <td>{{ maison.description }}</td>
+                <td>{{ maison.prix }}</td>
+                <td>{{ maison.image }}</td>
+                <td>
+                    <a class="btn btn-style btn-primary" href="{{ path('maison_edit', {'id': maison.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <center>
+    <a class="btn btn-style btn-primary" href="{{ path('maison_new') }}">Create new maison</a><br><br><br><br>
+        <a class="btn btn-style btn-primary" href="{{ path('promotion_new') }}">Create new Promotion</a>
+    </center>
+{% endblock %}

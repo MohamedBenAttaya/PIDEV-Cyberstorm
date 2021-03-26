@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Hotel{% endblock %}
+
+{% block content %}
+    <br> <br> <br>
+<section class="w3l-contact" id="contact">
+    <div class="contact-infubd py-5">
+        <div class="container py-lg-3">
+            <div style="margin: 8px auto; display: block; text-align:center;">
+    <h1>Edit Hotel</h1>
+
+    {{ include('hotel/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a class="btn btn-style btn-primary" href="{{ path('profil') }}">back to list</a>
+
+    {{ include('hotel/_delete_form.html.twig') }}
+            </div>
+            <div class="contact-grids row">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

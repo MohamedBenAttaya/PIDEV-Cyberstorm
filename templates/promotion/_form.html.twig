@@ -1,0 +1,27 @@
+{{ form_start(form) }}
+<div class="form-group">
+    <label>Nom</label>
+    {{ form_widget(form.Nom,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.Nom)}}
+    </div>
+    <label>type</label>
+    {{ form_widget(form.type,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.type)}}
+    </div>
+    <label>description</label>
+    {{ form_widget(form.description,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.description)}}
+    </div>
+    <label>Reduction</label>
+    {{ form_widget(form.Reduction,{'attr':{'class':'form-control'}})  }}
+    <div class="alert alert-danger" role="alert">
+        {{form_errors(form.Reduction)}}
+    </div>
+    <label>Reduction</label>
+    {{ form_widget(form.hotel)  }}
+</div>
+    <button class="btn btn-style btn-primary">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
