@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}hotel index{% endblock %}
+
+{% block content %}
+    <!--  Work gallery section -->
+    <section class="grids-1 py-5">
+        <div class="grids py-lg-5 py-md-4">
+            <div class="container">
+                <div style="margin: 8px auto; display: block; text-align:center;">
+
+                </div>
+                <h3 class="hny-title mb-5">Les hotels disponibles</h3>
+                <form method="post" action="{{ path('hotel_all') }}">
+                    <label>Entrer nom de l'hotel</label>
+                    <label>
+                        <input type="text" name="data" class="form-control">
+                    </label><input type="submit" class="btn btn-style btn-primary" value="Recherche">
+                </form>
+                <form method="post" action="{{ path('triH') }}">
+                    <div class="form-row">
+                        <div class="col">
+                            <label>valeurs min du prix
+                                <input type="number" class="form-control" placeholder="0" name="min">
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label>valeurs max du prix
+                                <input type="number" class="form-control" placeholder="1000" name="max">
+                            </label>
+                        </div>
+                    </div>
+                    <label>Prix
+                        <select class="form-control" name="type">
+                            <option>Croissant</option>
+                            <option>Décroissant</option>
+                        </select>
+                    </label>
+                    <input type="submit" class="btn btn-style btn-primary" value="Trier par prix">
+                </form>
+                <div class="row">
+                    {% for hotel in hotels %}
+                        <div class="col-lg-4 col-md-4 col-6">
+                            <div class="column">
+                                <a href="{{ path('hotel_show', {'id': hotel.id}) }}"><img src="{{ asset("assets/images/") }}{{hotel.image}}" alt="" class="img-fluid"></a>
+                                <div class="info">
+                                    <h4><a href="{{ path('hotel_show', {'id': hotel.id}) }}">{{ hotel.Nom }}   {{ hotel.NbEtoile }} Etoiles</a></h4>
+                                    <p>{{ hotel.adresse }} </p>
+                                    <div class="dst-btm">
+                                        <h6 class="">Prix</h6>
+                                        <span>{{ hotel.prix }} Dt</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        no records found
+                    {% endfor %}
+                </div>
+            </div>
+        </div></section>
+    <!--  //Work gallery section -->
+{% endblock %}
+

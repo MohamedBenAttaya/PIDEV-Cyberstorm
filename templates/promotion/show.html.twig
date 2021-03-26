@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Promotion{% endblock %}
+
+{% block content %}
+    <br> <br> <br> <br>
+    <h1>Promotion</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Nom</th>
+            <td>{{ promotion.Nom }}</td>
+        </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ promotion.description }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ promotion.type }}</td>
+            </tr>
+            <tr>
+                <th>Reduction</th>
+                <td>{{ promotion.Reduction }}</td>
+            </tr>
+            <tr>
+                <th>Hotel</th>
+                <td>{{ promotion.hotel.Nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-style btn-primary" href="{{ path('hotel_all') }}">back to list</a>
+
+
+    {{ include('promotion/_delete_form.html.twig') }}
+{% endblock %}
