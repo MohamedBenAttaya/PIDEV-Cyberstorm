@@ -3,7 +3,7 @@
 {% block title %}Evenement index{% endblock %}
 
 {% block content %}
-    <br><br>
+    <br><br><br><br><br>
 <h1>Evenement index</h1>
 
 <table class="table">
@@ -13,6 +13,9 @@
         <th>Nom</th>
         <th>Lieu</th>
         <th>Date</th>
+        <th>Téléphone</th>
+        <th>Email</th>
+        <th>Image</th>
         <th>Description</th>
         <th>actions</th>
     </tr>
@@ -24,6 +27,9 @@
             <td>{{ evenement.nom }}</td>
             <td>{{ evenement.lieu }}</td>
             <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+            <td>{{ evenement.tel }}</td>
+            <td>{{ evenement.email }}</td>
+            <td><img src="{{ asset("assets/images/") }}{{evenement.image}}" alt="" class="img-fluid"></td>
             <td>{{ evenement.description }}</td>
             <td>
                 {#<a href="{{ path('evenement_show', {'id': evenement.id}) }}">show</a>#}

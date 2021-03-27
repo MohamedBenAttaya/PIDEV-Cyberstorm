@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+
+
+
+
+<section class="w3l-grids-3 py-5">
+
+    <br><br>
+
+    <div class="d-flex justify-content-center">
+
+        <div class="p-2">
+            <form class="form-inline" method="post" action="{{ path('showEventProfile') }}">
+                <label>Rechercher </label>
+                &ensp;<input class="form-control mr-sm-2"   type="text" name="sercho"  ><input class="btn btn-outline-secondary" type="submit" , value="rechercher">
+            </form>
+
+
+        </div>
+
+        <div class="p-2">
+            <form method="" action="{{ path('showEventProfile') }}">
+                <input  class="btn btn-outline-secondary" type="submit"  value="Annuler Filtre">
+            </form>
+        </div>
+        {#     <form action="{{ path('trieDate') }}">
+            <input type="submit" , value="Trier par date" onclick="">
+        </form>#}
+        {#   <form action="{{ path('lastDate') }}">
+        <input type="submit" , value="récément ajouté" onclick="">
+    </form>#}
+        <div class="p-2">
+
+            <form class="form-inline" method="post" action="{{ path('trieXCroissant') }}">
+                <label>Trie	&darr;</label>
+                <select class="custom-select" name="tri">
+                    <option value="nom">Nom</option>
+                    <option value="date">Date</option>
+
+
+                </select>
+                <input class="btn btn-outline-secondary" type="submit" value="valdier">
+
+                {#  <button class="btn btn-outline-secondary" type="button">Valider</button>#}
+
+
+
+            </form>
+            <form class="form-inline" method="post" action="{{ path('trieX') }}">
+                <label>Trie &uarr;</label>
+                <select class="custom-select" name="tri">
+                    <option value="nom">Nom</option>
+                    <option value="date">Date</option>
+
+
+                </select>
+                <input class="btn btn-outline-secondary" type="submit" value="valdier">
+
+                {#  <button class="btn btn-outline-secondary" type="button">Valider</button>#}
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    {% for app in appointments %}
+   {# {% for evenement in evenements %}#}
+    <div class="container py-md-5">
+
+        <div class="row bottom-ab-grids">
+
+        <div class="col-lg-6 subject-card mt-4">
+
+            <div class="subject-card-header p-4">
+
+                <a href="#" class="card_title p-lg-4d-block">
+
+                    <div class="row align-items-center">
+
+
+                        <div class="col-sm-5 subject-img">
+                            <img src="assets/images/g5.jpg" class="img-fluid" alt="">
+                        </div>
+                        <div class="col-sm-7 subject-content mt-sm-0 mt-4">
+                            <h4>{{ app.nom }}</h4>
+                            <p>3Days, 4 Nights</p>
+                            <div class="dst-btm">
+                                <h6 class=""> {{ app.lieu }} </h6><br>
+
+
+                                <h6 class=""> {{ app.email  }} </h6><br>
+                                <h6 class=""> {{ app.tel  }} </h6></h6><br>
+                                <label>dispo :</label><h6 class=""> {{ app.maxp - app.nbparticipant  }} </h6></h6>
+
+                                {#<span>$1750</span>#}
+                            </div>
+
+                            <p class="sub-para"><h6 class=""> {{ app.date | date("d/m/Y")  }} </h6></p><br>
+
+                            <a href="{{ path('departicipeevent',{'id':app.id}) }}" class="btn btn-primary">AnnulPart</a>
+
+
+                                {% if app.nbparticipant == app.maxp %}
+                                <p>Vous ne pouvez pas participer !</p>
+                                {% else %}
+                                    <a href="{{ path('participeevent',{'id':app.id}) }}" class="btn btn-primary">Participer</a>
+                                    {% endif %}
+
+
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    {% endfor %}
+    <center> <div class="jsgrid-pager">
+        {{ knp_pagination_render(appointments) }}
+    </div></center>
+</section>
+
+
+{% endblock %}
+
+
+
+

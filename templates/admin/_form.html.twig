@@ -1,4 +1,33 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+<label>Nom</label>
+{{ form_widget(form.nom,{'attr':{'class':'form-control'}}) }}
+<div class="alert alert-warning" role="alert">
+    {{form_errors(form.nom)}}
+</div>
+<label>Prenom</label>
+{{ form_widget(form.prenom,{'attr':{'class':'form-control'}}) }}
+<div class="alert alert-warning" role="alert">
+    {{form_errors(form.prenom)}}
+</div>
+<label>CIN</label>
+{{ form_widget(form.cin,{'attr':{'class':'form-control'}}) }}
+<div class="alert alert-warning" role="alert">
+    {{form_errors(form.cin)}}
+</div>
+<label>Téléphone</label>
+{{ form_widget(form.tel,{'attr':{'class':'form-control'}}) }}
+<div class="alert alert-warning" role="alert">
+    {{form_errors(form.tel)}}
+</div>
+<label>Mail</label>
+{{ form_widget(form.mail,{'attr':{'class':'form-control'}}) }}
+<div class="alert alert-warning" role="alert">
+    {{form_errors(form.mail)}}
+</div>
+<label>Password</label>
+{{ form_widget(form.password,{'attr':{'class':'form-control'}}) }}
+<div class="alert alert-warning" role="alert">
+    {{form_errors(form.password)}}
+</div>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

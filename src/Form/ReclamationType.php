@@ -22,6 +22,7 @@ class ReclamationType extends AbstractType
             ->add('statut')
             ->add('description',TextareaType::class)
             ->add('type')
+            ->add('email')
             ->add('admin',EntityType::class,[
                 'class'=>Admin::class,
 

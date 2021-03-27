@@ -1,19 +1,31 @@
-{% extends 'homeAdmin.html.twig' %}
-{% block titTab %}
-    Evenements
+{% extends 'base.html.twig' %}
 
-{% endblock %}
+{% block title %}Evenement index{% endblock %}
 
-{% block tab  %}
+{% block content %}
+    <br><br><br><br><br>
+    <h1>Evenement index</h1>
+     <form method="post" action="{{ path('lastDate2') }}">
+         <select name="tri">
+             <option value="nom">Nom</option>
+             <option value="date">Date</option>
+
+
+         </select>
+         <input type="submit" value="valdier">
+     </form>
+
 
     <table class="table">
-        <input type="text" placeholder="search...." id="search" onkeyup="searchh()" class="form-control mb-3"/>
         <thead>
         <tr>
             <th>Id</th>
             <th>Nom</th>
             <th>Lieu</th>
             <th>Date</th>
+            <th>Téléphone</th>
+            <th>Email</th>
+            <th>Image</th>
             <th>Description</th>
             <th>actions</th>
         </tr>
@@ -25,10 +37,13 @@
                 <td>{{ evenement.nom }}</td>
                 <td>{{ evenement.lieu }}</td>
                 <td>{{ evenement.date ? evenement.date|date('Y-m-d') : '' }}</td>
+                <td>{{ evenement.tel }}</td>
+                <td>{{ evenement.email }}</td>
+                <td><img src="{{ asset("assets/images/") }}{{evenement.image}}" alt="" class="img-fluid"></td>
                 <td>{{ evenement.description }}</td>
                 <td>
                     {#<a href="{{ path('evenement_show', {'id': evenement.id}) }}">show</a>#}
-                    <a href="{{ path('eventModifAdmin', {'id': evenement.id}) }} " class="btn btn-warning">edit</a>
+                    <a href="{{ path('eventModif', {'id': evenement.id}) }} " class="btn btn-warning">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -38,20 +53,6 @@
         {% endfor %}
         </tbody>
     </table>
-{% endblock %}
-{% block js %}
-<script>
-    function searchh(){
-        var sch=$("#search").val();
-        $.ajax({
-            url: "{{ path('search_voy') }}",
-            data:{dat: sch},
-            type: "POST",
-            success: function(data){
-                console.log('okkk');
-                $('#show').html(data).show();
-            }
-        });
-    }
-</script>
+
+    <a href="{{ path('addevents') }}" class="btn-success">Create new</a>
 {% endblock %}

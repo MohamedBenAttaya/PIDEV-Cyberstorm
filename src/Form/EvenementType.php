@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class EvenementType extends AbstractType
 {
@@ -16,6 +17,9 @@ class EvenementType extends AbstractType
             ->add('nom')
             ->add('lieu')
             ->add('date')
+            ->add('tel')
+            ->add('email')
+            ->add('image',FileType::class,array('data_class'=>null,'required' => false))
             ->add('description',TextareaType::class)
 
         ;

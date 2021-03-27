@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Form\EvenementType;
 use App\Repository\EvenementRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,16 @@ class EvenementController extends AbstractController
     /**
      * @Route("/", name="evenement_index", methods={"GET"})
      */
-    public function index(EvenementRepository $evenementRepository): Response
+    public function index(Request $request,EvenementRepository $evenementRepository, PaginatorInterface $paginator): Response
     {
+        $allAppoinments = $evenementRepository->findAll();
+        $appointments = $paginator->paginate(
+            $allAppoinments,
+            $request->query->getInt('page',1),
+            5
+        );
         return $this->render('evenement/index.html.twig', [
-            'evenements' => $evenementRepository->findAll(),
+            'appointments' => $appointments
         ]);
     }
 
@@ -91,6 +98,7 @@ class EvenementController extends AbstractController
 
         return $this->redirectToRoute('showEvent');
     }
+
 
 
 

@@ -1,0 +1,12 @@
+<h1>Nouvel évènement ajouté </h1>
+<p>Bonjour chèr(e) client(e),</p>
+<p>Votre évènement a été ajouté avec succès.</p>
+<p>Ci-dessous les informations liés a votre évènement,</p>
+<p>Nom : {{ evenement.nom }}</p>
+<p>Lieu : {{ evenement.lieu }}</p>
+<p>Date : {{ evenement.date | date("d/m/Y")  }}</p>
+<p>Téléphone : {{ evenement.tel }}</p>
+<p> Email : {{ evenement.email | raw }}</p>
+<p>Description : {{ evenement.description }}</p>
+<br><br>
+<p>Cordialement.</p>

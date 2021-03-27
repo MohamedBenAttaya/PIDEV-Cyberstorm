@@ -6,6 +6,7 @@ use App\Repository\AdminRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AdminRepository::class)
@@ -21,26 +22,31 @@ class Admin
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ doit etre rempli")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ doit etre rempli")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(min=8,max=8)
      */
     private $cin;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Length(min=8,max=8)
      */
     private $tel;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="cette adresse email n' est pas correcte")
      */
     private $mail;
 

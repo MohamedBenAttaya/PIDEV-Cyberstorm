@@ -47,4 +47,36 @@ class ReclamationRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findReclamByXx($name)
+    {
+
+        $Query=$this->getEntityManager()
+            ->createQuery("select e from App\Entity\Reclamation e where e.id LIKE :name or e.statut LIKE :name or e.email LIKE :name or e.description LIKE :name or e.type LIKE :name ")
+            ->setParameter('name','%'.$name.'%');
+        return $Query->getResult();
+    }
+
+    function listReclamationByAdmin($id){
+        return $this->createQueryBuilder('r')
+            ->join('r.admin','a')
+            ->addSelect('a')
+            ->where('a.id=:id')
+            ->setParameter('id',$id)
+            ->getQuery()->getResult();
+            ;
+    }
+
+    /**
+     * Returns numbre of "recla" per day
+     * return void
+     */
+    public function countByDate(){
+         $query = $this->createQueryBuilder('r')
+             ->select('SUBSTRING(r.date,1,10) as dateRecla, count(r) as counts')
+             ->groupBy('dateRecla');
+         return $query->getQuery()->getResult();
+    }
+
+
 }
