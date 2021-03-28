@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voy{% endblock %}
+
+{% block content %}
+    <h1>Voy</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ voy.id }}</td>
+            </tr>
+            <tr>
+                <th>Point_depart</th>
+                <td>{{ voy.pointDepart }}</td>
+            </tr>
+            <tr>
+                <th>Point_arrive</th>
+                <td>{{ voy.pointArrive }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ voy.email }}</td>
+            </tr>
+            <tr>
+                <th>Num_tel</th>
+                <td>{{ voy.numTel }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('voy_index') }}">liste</a>
+
+    <a href="{{ path('voy_edit', {'id': voy.id}) }}">modifier</a>
+
+    {{ include('voy/_delete_form.html.twig') }}
+{% endblock %}

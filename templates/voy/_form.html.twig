@@ -1,0 +1,30 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+<br>
+<br>
+<br>
+<br>
+<div class="form-group">
+    <label>point départ</label>
+    {{ form_widget(form.point_depart,{'attr':{'class':'form-control'}}) }}
+
+
+
+    <label>point arrivé</label>
+    {{ form_widget(form.point_arrive,{'attr':{'class':'form-control'}}) }}
+
+    <label>émail</label>
+    {{ form_widget(form.email,{'attr':{'class':'form-control'}}) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.email) }}
+
+    </div>
+
+    <label>numéro téléphone</label>
+    {{ form_widget(form.num_tel,{'attr':{'class':'form-control'}}) }}
+    <div class="alert alert-danger">
+        {{ form_errors(form.num_tel) }}
+
+    </div>
+</div>
+    <button class="btn btn-style btn-primary" >{{ button_label|default('ajouter') }}</button>
+{{ form_end(form) }}

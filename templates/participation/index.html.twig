@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participation index{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Participation</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>IdInternaute</th>
+                <th>Type</th>
+                <th>id voyage</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participation in participations %}
+            <tr>
+                <td>{{ participation.id }}</td>
+                <td>{{ participation.idInternaute }}</td>
+                <td>{{ participation.type }}</td>
+                <td>{{ participation.voy }}</td>
+                <td>
+                    <a href="{{ path('participation_show', {'id': participation.id}) }}">show</a>
+                    <a href="{{ path('participation_edit', {'id': participation.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('participation_new') }}">Create new</a>
+{% endblock %}

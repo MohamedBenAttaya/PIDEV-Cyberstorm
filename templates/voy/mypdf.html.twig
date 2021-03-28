@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title of the document</title>
+</head>
+
+<body>
+<br><br>
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Point_depart</th>
+        <th>Point_arrive</th>
+        <th>Email</th>
+        <th>Num_tel</th>
+        <th>actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for voy in voys %}
+        <tr>
+            <td>{{ voy.id }}</td>
+            <td>{{ voy.pointDepart }}</td>
+            <td>{{ voy.pointArrive }}</td>
+            <td>{{ voy.email }}</td>
+            <td>{{ voy.numTel }}</td>
+            <td>
+                <a href="{{ path('voy_show', {'id': voy.id}) }}">afficher</a>
+                <a href="{{ path('voy_edit', {'id': voy.id}) }}">modifier</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="6">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</body>
+</html>

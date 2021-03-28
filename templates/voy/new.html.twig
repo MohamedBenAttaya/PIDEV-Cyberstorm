@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Voy{% endblock %}
+
+{% block content %}
+    <h1>ajouter voyage</h1>
+
+    {{ include('voy/_form.html.twig') }}
+
+    <a href="{{ path('voy_index') }}" >afficher</a>
+
+{% endblock %}

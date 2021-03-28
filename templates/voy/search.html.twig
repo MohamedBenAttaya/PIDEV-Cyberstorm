@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Voy index{% endblock %}
+
+{% block content %}
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>Les voyages</h1>
+    <div id="show">
+
+     <table class="table">
+        <thead>
+        <form method="post" action="{{ path('triVoy') }}">
+            <label>id
+                <select class="form-control" name="type">
+                    <option>Croissant</option>
+                    <option>Décroissant</option>
+                </select>
+            </label>
+            <input type="submit" class="btn btn-style btn-primary" value="Trier par ID">
+        </form>
+            <tr>
+                <th>Id</th>
+                <th>Point_depart</th>
+                <th>Point_arrive</th>
+                <th>Email</th>
+                <th>Num_tel</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for voy in voys %}
+            <tr>
+                <td>{{ voy.id }}</td>
+                <td>{{ voy.pointDepart }}</td>
+                <td>{{ voy.pointArrive }}</td>
+                <td>{{ voy.email }}</td>
+                <td>{{ voy.numTel }}</td>
+                <td>
+                    <a href="{{ path('voy_show', {'id': voy.id}) }}">show</a>
+                    <a href="{{ path('voy_edit', {'id': voy.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <a href="{{ path('voy_new') }}">Create new</a>
+    </div>
+   {% endblock %}

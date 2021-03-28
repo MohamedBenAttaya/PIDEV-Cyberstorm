@@ -1,0 +1,12 @@
+{{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+<br>
+<br>
+<br>
+<label>id internaute</label>
+    {{ form_widget(form.idInternaute,{'attr':{'class':'form-control'}}) }}
+<label>type</label>
+{{ form_widget(form.type,{'attr':{'class':'form-control'}}) }}
+<label>id voyage</label>
+{{ form_widget(form.voy,{'attr':{'class':'form-control'}}) }}
+<button class="btn btn-style btn-primary" >{{ button_label|default('ajouter') }}</button>
+{{ form_end(form) }}
