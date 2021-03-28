@@ -1,0 +1,49 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Commentaire index{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <h1>Commentaire index</h1>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+
+
+            {% for commentaire in commentaires %}
+
+                <tr>
+                    <td>{{ commentaire.id }}</td>
+                    <td>{{ commentaire.description }}</td>
+
+                    <td>
+                        <a class="btn btn-link" href="{{ path('commentaire_show', {'id': commentaire.id}) }}">consulter</a>
+                        <a class="btn btn-link" href="{{ path('commentaire_edit', {'id': commentaire.id}) }}">modifier</a>
+
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+        <a href ="{{ path('pdf') }}" class="btn btn-primary" >print</a>
+        <a class="btn btn-dark" href="{{ path('commentaire_new') }}">Ajouter un autre commentaire</a>
+    </div>
+{% endblock %}

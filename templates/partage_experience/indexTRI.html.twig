@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PartageExperience {% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <h1>Liste des partages de experiences :</h1>
+        <a class="btn btn-dark" href="{{ path('partage_experience_new') }}" >Ajouter une autre experience</a>
+
+        <form method="post" action="{{ path('triH') }}">
+            <label>
+                <select class="form-control" name="type">
+                    <option>Croissant</option>
+                    <option>Décroissant</option>
+                </select>
+            </label>
+            <input type="submit" class="btn btn-dark" value="Trier par nom">
+        </form>
+
+        <form method="post" action="{{ path('triD') }}">
+            <label>
+                <select class="form-control" name="type">
+                    <option>Nouveaux</option>
+                    <option>Ancien</option>
+                </select>
+            </label>
+            <input type="submit" class="btn btn-dark" value="Trier par date">
+        </form>
+
+        <form method="post" action="{{ path('recherche') }}">
+            <label>Recherche</label>
+            <input type="text" name="search"><input type="submit" value="Recherche">
+        </form>
+
+        {% for partage_experience in partage_experiences %}
+
+
+            <div class="col-lg-4 col-md-4 col-6">
+                <div class="column">
+                    <a href="{{ path('partage_experience_show', {'id': partage_experience.id}) }}"><img src="{{ asset("assets/images/") }}{{partage_experience.image}}" alt="" class="img-fluid"></a></a>
+                    <div class="info">
+                        <h4><a href="{{ path('partage_experience_show', {'id': partage_experience.id}) }}">{{ partage_experience.destination }}</a></h4>
+                        <p>--- </p>
+                        <div class="dst-btm">
+                            <h6 class="">{{ partage_experience.description }}</h6>
+                            <span>---</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% else %}
+
+            <h>no records found</h>
+
+        {% endfor %}
+
+
+
+    </div>
+{% endblock %}

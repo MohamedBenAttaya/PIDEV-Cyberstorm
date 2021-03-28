@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PartageExperience{% endblock %}
+
+{% block content %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+    <h1>PartageExperience</h1>
+    <br>
+    <br>
+        <div class="card" style="width: 18rem;">
+            <img src="{{ asset("assets/images/") }}{{partage_experience.image}}" alt="" class="img-fluid">
+            <div class="card-body">
+
+                <h5 class="card-title">{{ partage_experience.destination }}</h5>
+                <p class="card-text">{{ partage_experience.description }}</p>
+                <br>
+                <br>
+
+            </div>
+        </div>
+
+
+        <a class="btn btn-dark" href="{{ path('commentaire_new') }}">Commenter!!!!!!!!</a>
+
+
+
+
+        <br>
+        <br>
+        <br>
+
+        <a class="btn btn-dark" href="{{ path('partage_experience_index') }}">Retour a la liste </a>
+
+        <a class="btn btn-dark" href="{{ path('partage_experience_edit', {'id': partage_experience.id}) }}">Modifier</a>
+
+
+        {% for commentaire in commentaires %}
+
+            <div class="row d-flex justify-content-center mt-100 mb-100">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+
+                        </div>
+                        <div class="comment-widgets">
+                            <!-- Comment Row -->
+                            <div class="d-flex flex-row comment-row m-t-0">
+                                <div class="p-2"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583336/AAA/4.jpg" alt="user" width="50" class="rounded-circle"></div>
+                                <div class="comment-text w-100">
+                                    <h6 class="font-medium">James Thomas</h6> <span class="m-b-15 d-block">{{ commentaire.description }}</span>
+                                    <div class="comment-footer"> <span class="text-muted float-right">April 14, 2019</span> <button type="button" class="btn btn-cyan btn-sm">Edit</button> <button type="button" class="btn btn-success btn-sm">Publish</button> <button type="button" class="btn btn-danger btn-sm">Delete</button> </div>
+                                </div>
+                            </div> <!-- Comment Row -->
+
+
+                        </div> <!-- Card -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        {% else %}
+
+               <p>Pas de commentaires</p>
+
+        {% endfor %}
+
+
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    <a class="btn btn-dark" href="{{ path('partage_experience_index') }}">Retour a la liste </a>
+
+    <a class="btn btn-dark" href="{{ path('partage_experience_edit', {'id': partage_experience.id}) }}">Modifier</a>
+
+    {{ include('partage_experience/_delete_form.html.twig') }}
+    </div>
+{% endblock %}
